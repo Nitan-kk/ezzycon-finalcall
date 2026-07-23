@@ -7,6 +7,7 @@ import Process from "@/components/process";
 import Difference from "@/components/difference";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
+import AIAssistant from "@/components/ai-assistant";
 
 export default function Home() {
   return (
@@ -44,6 +45,9 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      {/* Ezzycon AI Assistant */}
+      <AIAssistant />
     </>
   );
 }
