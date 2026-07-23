@@ -3,6 +3,7 @@ import Hero from "@/components/hero";
 import Trust from "@/components/trust";
 import Services from "@/components/services";
 import Work from "@/components/work";
+import About from "@/components/about";
 import Process from "@/components/process";
 import Difference from "@/components/difference";
 import Contact from "@/components/contact";
@@ -29,6 +30,10 @@ export default function Home() {
 
         <section id="work">
           <Work />
+        </section>
+
+        <section id="about">
+          <About />
         </section>
 
         <section id="process">

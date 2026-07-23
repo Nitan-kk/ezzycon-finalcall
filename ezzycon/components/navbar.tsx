@@ -17,6 +17,10 @@ const navItems = [
     href: "#work",
   },
   {
+    label: "About",
+    href: "#about",
+  },
+  {
     label: "Process",
     href: "#process",
   },
@@ -54,10 +58,19 @@ export default function Navbar() {
 
   return (
     <>
+      {/* ========================= */}
       {/* NAVBAR */}
+      {/* ========================= */}
+
       <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{
+          y: -100,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
         transition={{
           duration: 0.8,
           ease: [0.22, 1, 0.36, 1],
@@ -69,17 +82,24 @@ export default function Navbar() {
             backgroundColor: scrolled
               ? "rgba(255,255,255,0.88)"
               : "rgba(255,255,255,0.5)",
+
             borderColor: scrolled
               ? "rgba(59,117,151,0.16)"
               : "rgba(255,255,255,0.5)",
+
             boxShadow: scrolled
               ? "0 15px 50px rgba(9,60,93,0.10)"
               : "0 10px 40px rgba(9,60,93,0.03)",
           }}
-          transition={{ duration: 0.35 }}
+          transition={{
+            duration: 0.35,
+          }}
           className="mx-auto flex h-[70px] max-w-7xl items-center justify-between rounded-full border px-4 backdrop-blur-2xl sm:h-[76px] sm:px-6"
         >
+          {/* ========================= */}
           {/* LOGO */}
+          {/* ========================= */}
+
           <a
             href="#home"
             onClick={closeMenu}
@@ -110,7 +130,10 @@ export default function Navbar() {
             </div>
           </a>
 
+          {/* ========================= */}
           {/* DESKTOP NAV */}
+          {/* ========================= */}
+
           <div className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <a
@@ -125,12 +148,19 @@ export default function Navbar() {
             ))}
           </div>
 
+          {/* ========================= */}
           {/* DESKTOP CTA */}
+          {/* ========================= */}
+
           <div className="hidden lg:block">
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{
+                scale: 1.04,
+              }}
+              whileTap={{
+                scale: 0.97,
+              }}
               className="group flex items-center gap-3 rounded-full bg-[#093C5D] px-5 py-3 text-sm font-medium text-white shadow-lg shadow-[#093C5D]/15"
             >
               <span>Start a Project</span>
@@ -141,9 +171,14 @@ export default function Navbar() {
             </motion.a>
           </div>
 
-          {/* MOBILE BUTTON */}
+          {/* ========================= */}
+          {/* MOBILE MENU BUTTON */}
+          {/* ========================= */}
+
           <motion.button
-            whileTap={{ scale: 0.9 }}
+            whileTap={{
+              scale: 0.9,
+            }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={
               menuOpen
@@ -157,9 +192,18 @@ export default function Navbar() {
               {menuOpen ? (
                 <motion.span
                   key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
+                  initial={{
+                    opacity: 0,
+                    rotate: -90,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    rotate: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    rotate: 90,
+                  }}
                   className="absolute text-xl"
                 >
                   ×
@@ -167,9 +211,18 @@ export default function Navbar() {
               ) : (
                 <motion.span
                   key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
+                  initial={{
+                    opacity: 0,
+                    rotate: 90,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    rotate: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    rotate: -90,
+                  }}
                   className="absolute text-lg"
                 >
                   ☰
@@ -180,17 +233,30 @@ export default function Navbar() {
         </motion.nav>
       </motion.header>
 
+      {/* ========================= */}
       {/* MOBILE OVERLAY + MENU */}
+      {/* ========================= */}
+
       <AnimatePresence>
         {menuOpen && (
           <>
+            {/* Overlay */}
+
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               onClick={closeMenu}
               className="fixed inset-0 z-40 bg-[#093C5D]/20 backdrop-blur-sm lg:hidden"
             />
+
+            {/* Mobile Menu */}
 
             <motion.div
               initial={{
@@ -210,9 +276,14 @@ export default function Navbar() {
               }}
               className="fixed left-4 right-4 top-[98px] z-50 overflow-hidden rounded-[2rem] border border-[#6FD1D7]/20 bg-white/90 p-5 shadow-[0_30px_100px_rgba(9,60,93,0.18)] backdrop-blur-2xl lg:hidden"
             >
+              {/* Decorative Glow */}
+
               <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#6FD1D7]/15 blur-3xl" />
 
-              {/* Links */}
+              {/* ========================= */}
+              {/* MOBILE LINKS */}
+              {/* ========================= */}
+
               <div className="relative flex flex-col">
                 {navItems.map((item, index) => (
                   <motion.a
@@ -232,7 +303,9 @@ export default function Navbar() {
                     }}
                     className="group flex items-center justify-between border-b border-[#093C5D]/8 py-5 text-lg font-medium text-[#093C5D]"
                   >
-                    <span>{item.label}</span>
+                    <span>
+                      {item.label}
+                    </span>
 
                     <span className="text-[#3B7597] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
                       ↗
@@ -241,7 +314,10 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Mobile CTA */}
+              {/* ========================= */}
+              {/* MOBILE CTA */}
+              {/* ========================= */}
+
               <motion.a
                 href="#contact"
                 onClick={closeMenu}
@@ -272,6 +348,10 @@ export default function Navbar() {
                   ↗
                 </div>
               </motion.a>
+
+              {/* ========================= */}
+              {/* MOBILE FOOTER */}
+              {/* ========================= */}
 
               <div className="mt-5 flex items-center justify-between">
                 <span className="text-[9px] font-semibold tracking-[0.2em] text-[#093C5D]/30">
