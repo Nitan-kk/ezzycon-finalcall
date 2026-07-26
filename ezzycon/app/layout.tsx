@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "Ezzycon automation",
     "Ezzycon digital systems",
 
-    // Core Services
+    // AI & Automation
     "AI automation agency",
     "AI automation company",
     "AI development company",
@@ -122,7 +122,7 @@ export const metadata: Metadata = {
     "AI lead generation",
     "automated lead generation",
 
-    // Location / India
+    // India
     "AI automation agency India",
     "AI automation company India",
     "AI development company India",
@@ -130,6 +130,8 @@ export const metadata: Metadata = {
     "AI agency India",
     "automation company India",
     "web development agency India",
+
+    // Gwalior
     "AI automation agency Gwalior",
     "AI development company Gwalior",
     "web development company Gwalior",
@@ -164,14 +166,17 @@ export const metadata: Metadata = {
     },
   },
 
+  // ==========================================
+  // OPEN GRAPH
+  // ==========================================
+
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: siteUrl,
     siteName: "Ezzycon",
 
-    title:
-      "Ezzycon | AI Automation & Digital Systems Company",
+    title: "Ezzycon | AI Automation & Digital Systems Company",
 
     description:
       "We build high-performance websites, AI-powered automation, and intelligent digital systems that help businesses grow.",
@@ -181,17 +186,19 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt:
-          "Ezzycon — AI Automation & Digital Systems Company",
+        alt: "Ezzycon — AI Automation & Digital Systems Company",
       },
     ],
   },
 
+  // ==========================================
+  // TWITTER / X
+  // ==========================================
+
   twitter: {
     card: "summary_large_image",
 
-    title:
-      "Ezzycon | AI Automation & Digital Systems Company",
+    title: "Ezzycon | AI Automation & Digital Systems Company",
 
     description:
       "We build high-performance websites, AI-powered automation, and intelligent digital systems that help businesses grow.",
@@ -199,9 +206,26 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
 
+  // ==========================================
+  // FAVICON & APP ICON
+  // ==========================================
+
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      {
+        url: "/logo.png",
+        type: "image/png",
+      },
+    ],
+
+    shortcut: ["/logo.png"],
+
+    apple: [
+      {
+        url: "/logo.png",
+        type: "image/png",
+      },
+    ],
   },
 
   category: "technology",

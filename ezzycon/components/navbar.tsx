@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -37,7 +38,9 @@ export default function Navbar() {
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -45,7 +48,11 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
@@ -58,9 +65,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ========================= */}
-      {/* NAVBAR */}
-      {/* ========================= */}
+      {/* ========================================
+          NAVBAR
+      ======================================== */}
 
       <motion.header
         initial={{
@@ -96,29 +103,56 @@ export default function Navbar() {
           }}
           className="mx-auto flex h-[70px] max-w-7xl items-center justify-between rounded-full border px-4 backdrop-blur-2xl sm:h-[76px] sm:px-6"
         >
-          {/* ========================= */}
-          {/* LOGO */}
-          {/* ========================= */}
+          {/* ========================================
+              LOGO
+          ======================================== */}
 
           <a
             href="#home"
             onClick={closeMenu}
+            aria-label="Ezzycon Home"
             className="group flex items-center gap-3"
           >
+            {/* Actual Ezzycon Logo */}
             <motion.div
               whileHover={{
-                rotate: 5,
-                scale: 1.05,
+                scale: 1.06,
+                rotate: 3,
               }}
-              className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[#093C5D] text-white shadow-lg"
+              whileTap={{
+                scale: 0.96,
+              }}
+              transition={{
+                duration: 0.25,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3B7597] via-transparent to-[#5DF8D8] opacity-60" />
+              <Image
+                src="/logo.png"
+                alt="Ezzycon"
+                width={40}
+                height={40}
+                priority
+                className="h-full w-full object-contain"
+              />
 
-              <span className="relative text-lg font-bold">
-                E
-              </span>
+              {/* Subtle Hover Glow */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                whileHover={{
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.25,
+                }}
+                className="pointer-events-none absolute inset-0 rounded-xl bg-[#6FD1D7]/10"
+              />
             </motion.div>
 
+            {/* Brand Text */}
             <div className="flex flex-col">
               <span className="text-[15px] font-bold tracking-[0.12em] text-[#093C5D]">
                 EZZYCON
@@ -130,16 +164,16 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* ========================= */}
-          {/* DESKTOP NAV */}
-          {/* ========================= */}
+          {/* ========================================
+              DESKTOP NAVIGATION
+          ======================================== */}
 
           <div className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="group relative rounded-full px-5 py-3 text-sm font-medium text-[#093C5D]/60 transition-colors hover:text-[#093C5D]"
+                className="group relative rounded-full px-5 py-3 text-sm font-medium text-[#093C5D]/60 transition-colors duration-300 hover:text-[#093C5D]"
               >
                 {item.label}
 
@@ -148,9 +182,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* ========================= */}
-          {/* DESKTOP CTA */}
-          {/* ========================= */}
+          {/* ========================================
+              DESKTOP CTA
+          ======================================== */}
 
           <div className="hidden lg:block">
             <motion.a
@@ -161,25 +195,29 @@ export default function Navbar() {
               whileTap={{
                 scale: 0.97,
               }}
+              transition={{
+                duration: 0.2,
+              }}
               className="group flex items-center gap-3 rounded-full bg-[#093C5D] px-5 py-3 text-sm font-medium text-white shadow-lg shadow-[#093C5D]/15"
             >
               <span>Start a Project</span>
 
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-base transition-all group-hover:bg-[#6FD1D7] group-hover:text-[#093C5D]">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-base transition-all duration-300 group-hover:bg-[#6FD1D7] group-hover:text-[#093C5D]">
                 ↗
               </span>
             </motion.a>
           </div>
 
-          {/* ========================= */}
-          {/* MOBILE MENU BUTTON */}
-          {/* ========================= */}
+          {/* ========================================
+              MOBILE MENU BUTTON
+          ======================================== */}
 
           <motion.button
+            type="button"
             whileTap={{
               scale: 0.9,
             }}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((prev) => !prev)}
             aria-label={
               menuOpen
                 ? "Close navigation menu"
@@ -204,6 +242,9 @@ export default function Navbar() {
                     opacity: 0,
                     rotate: 90,
                   }}
+                  transition={{
+                    duration: 0.2,
+                  }}
                   className="absolute text-xl"
                 >
                   ×
@@ -223,6 +264,9 @@ export default function Navbar() {
                     opacity: 0,
                     rotate: -90,
                   }}
+                  transition={{
+                    duration: 0.2,
+                  }}
                   className="absolute text-lg"
                 >
                   ☰
@@ -233,9 +277,9 @@ export default function Navbar() {
         </motion.nav>
       </motion.header>
 
-      {/* ========================= */}
-      {/* MOBILE OVERLAY + MENU */}
-      {/* ========================= */}
+      {/* ========================================
+          MOBILE OVERLAY + MENU
+      ======================================== */}
 
       <AnimatePresence>
         {menuOpen && (
@@ -251,6 +295,9 @@ export default function Navbar() {
               }}
               exit={{
                 opacity: 0,
+              }}
+              transition={{
+                duration: 0.25,
               }}
               onClick={closeMenu}
               className="fixed inset-0 z-40 bg-[#093C5D]/20 backdrop-blur-sm lg:hidden"
@@ -274,15 +321,17 @@ export default function Navbar() {
                 y: -20,
                 scale: 0.96,
               }}
+              transition={{
+                duration: 0.3,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="fixed left-4 right-4 top-[98px] z-50 overflow-hidden rounded-[2rem] border border-[#6FD1D7]/20 bg-white/90 p-5 shadow-[0_30px_100px_rgba(9,60,93,0.18)] backdrop-blur-2xl lg:hidden"
             >
               {/* Decorative Glow */}
 
               <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#6FD1D7]/15 blur-3xl" />
 
-              {/* ========================= */}
-              {/* MOBILE LINKS */}
-              {/* ========================= */}
+              {/* Mobile Links */}
 
               <div className="relative flex flex-col">
                 {navItems.map((item, index) => (
@@ -303,20 +352,16 @@ export default function Navbar() {
                     }}
                     className="group flex items-center justify-between border-b border-[#093C5D]/8 py-5 text-lg font-medium text-[#093C5D]"
                   >
-                    <span>
-                      {item.label}
-                    </span>
+                    <span>{item.label}</span>
 
-                    <span className="text-[#3B7597] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                    <span className="text-[#3B7597] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
                       ↗
                     </span>
                   </motion.a>
                 ))}
               </div>
 
-              {/* ========================= */}
-              {/* MOBILE CTA */}
-              {/* ========================= */}
+              {/* Mobile CTA */}
 
               <motion.a
                 href="#contact"
@@ -344,14 +389,12 @@ export default function Navbar() {
                   </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#6FD1D7] text-lg text-[#093C5D]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#6FD1D7] text-lg text-[#093C5D] transition-transform duration-300 group-hover:translate-x-1">
                   ↗
                 </div>
               </motion.a>
 
-              {/* ========================= */}
-              {/* MOBILE FOOTER */}
-              {/* ========================= */}
+              {/* Mobile Footer */}
 
               <div className="mt-5 flex items-center justify-between">
                 <span className="text-[9px] font-semibold tracking-[0.2em] text-[#093C5D]/30">
